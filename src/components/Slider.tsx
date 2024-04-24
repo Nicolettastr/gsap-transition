@@ -59,7 +59,7 @@ const Slider: React.FC<SliderProps> = ({ className, scale }) => {
         }
     }, [images, theme]);
 
-    const icons = images.map(() => useRef(null));
+    const icons = new Array(images.length).fill(null).map(() => useRef(null));
 
     useGSAP(() => {
         if (scale) {
