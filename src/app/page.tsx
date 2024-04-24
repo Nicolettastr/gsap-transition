@@ -1,13 +1,12 @@
 "use client";
 import gsap from "gsap";
 import TextPlugin from "gsap/TextPlugin";
-import { ScrollTrigger, Flip, ScrollSmoother } from "gsap/all";
+import { ScrollTrigger, Flip } from "gsap/all";
 import { useEffect, useRef, useState } from "react";
 import Slider from "@/components/Slider";
 import { useGSAP } from "@gsap/react";
-import Navigation from "@/components/Navegation";
 
-gsap.registerPlugin(TextPlugin, ScrollTrigger, ScrollSmoother, useGSAP, Flip);
+gsap.registerPlugin(TextPlugin, ScrollTrigger, useGSAP, Flip);
 
 const Home = () => {
     const titleRef = useRef(null);
@@ -32,7 +31,7 @@ const Home = () => {
                             gsap.fromTo(
                                 subtitleRef.current,
                                 {
-                                    opacity: 0
+                                    opacity: 0,
                                 },
                                 {
                                     opacity: 1,
@@ -140,8 +139,8 @@ const Home = () => {
     return (
         <>
             <section ref={homeSection} className='homeSection'>
-                <div  ref={logoWrapper}  className='helperWrapper'>
-                    <span  className='helper'></span>
+                <div ref={logoWrapper} className='helperWrapper'>
+                    <span className='helper'></span>
                 </div>
                 <div className='homeContainer'>
                     <h1 ref={titleRef} className='split b-title'>

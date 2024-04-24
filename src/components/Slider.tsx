@@ -51,10 +51,6 @@ const Slider: React.FC<SliderProps> = ({ className, scale }) => {
 
     console.log(theme);
 
-    useEffect(() => {
-        filteredImages;
-    }, [theme]);
-
     const filteredImages = useMemo(() => {
         if (theme) {
             return images.filter((img) => img !== "./c.svg");
