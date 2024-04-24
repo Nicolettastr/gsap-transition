@@ -32,12 +32,10 @@ const Home = () => {
                             gsap.fromTo(
                                 subtitleRef.current,
                                 {
-                                    opacity: 0,
-                                    top: "100%",
+                                    opacity: 0
                                 },
                                 {
                                     opacity: 1,
-                                    top: "40%",
                                     duration: 2,
                                 }
                             );
@@ -94,12 +92,12 @@ const Home = () => {
             ScrollTrigger.create({
                 trigger: logoWrapper.current,
                 start: "top top",
-                scrub: true,
                 onEnter: () => {
                     if (windowWidth > 1000) {
                         Flip.fit(titleRef.current, logoWrapper.current, {
                             fontSize: "2.2rem",
                             paddingLeft: "1rem",
+                            paddingTop: "1rem",
                             duration: 2,
                             ease: "power1.inOut",
                             stagger: 2,
@@ -142,8 +140,8 @@ const Home = () => {
     return (
         <>
             <section ref={homeSection} className='homeSection'>
-                <div ref={logoWrapper} className='helperWrapper'>
-                    <span className='helper'></span>
+                <div  ref={logoWrapper}  className='helperWrapper'>
+                    <span  className='helper'></span>
                 </div>
                 <div className='homeContainer'>
                     <h1 ref={titleRef} className='split b-title'>

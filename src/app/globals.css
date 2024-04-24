@@ -45,12 +45,8 @@ nav {
     display: flex;
     width: 100vw;
     position: fixed;
-    justify-content: flex-end;
+    justify-content: space-around;
     z-index: 4;
-}
-
-nav div {
-    flex: 0 0 80vw;
 }
 
 .navPaths {
@@ -111,7 +107,6 @@ nav div {
 .homeSection {
     width: 100%;
     height: 100vh;
-    padding: 0 1rem;
     display: flex;
     flex-direction: column;
     position: relative;
@@ -143,14 +138,10 @@ nav div {
     width: 100vw;
     color: var(--dark);
     font-size: 5rem;
+    padding: 0 2rem 0 0;
     font-weight: 900;
     text-align: center;
-    margin-top: 8rem;
     position: fixed;
-}
-
-.homeContainer {
-    padding: 0 1rem;
 }
 
 [data-theme="dark"] .b-title {
@@ -165,6 +156,7 @@ nav div {
     justify-content: center;
     margin-top: 2rem;
     position: absolute;
+    top: 45%;
     z-index: 3;
 }
 
@@ -241,7 +233,6 @@ nav div {
     align-items: center;
     position: fixed;
 }
-
 .helper {
     width: 300px;
     height: 100px;
@@ -249,12 +240,22 @@ nav div {
     display: block;
 }
 
+.homeContainer {
+    width: 100vw;
+height: 80vh;
+display: flex;
+align-items: center;
+flex-direction: column;
+position: fixed;
+top: 20%;
+}
+
 @media (min-width: 600px) {
     .b-title {
         font-size: 8rem;
     }
 
-    .subtitle {
+    .le {
         font-size: 3rem;
     }
 
@@ -265,15 +266,16 @@ nav div {
     .left {
         animation: slideLeft 40s linear infinite;
     }
-}
-
-@media (min-width: 1000px) {
-    .b-title {
-        font-size: 10rem;
-    }
 
     .subtitle {
-        font-size: 3.6rem;
+        top: 80%;
+    }
+}
+
+@media (min-width: 1080px) {
+
+    .subtitle {
+        top: 75%
     }
 
     .brand-logo {
@@ -289,8 +291,8 @@ nav div {
     }
 
     .homeContainer {
-        margin-top: 8rem;
-        position: relative;
+        margin-top: 3rem;
+        height: 50vh;
     }
 
     @keyframes slideLeft {
@@ -316,8 +318,13 @@ nav div {
     }
 }
 
-@media (min-width: 1400px) {
+@media (min-width: 1300px) {
+
+    .subtitle {
+        top: 60%
+    }
+
     .b-title {
-        font-size: 15rem;
+        font-size: 10rem;
     }
 }
