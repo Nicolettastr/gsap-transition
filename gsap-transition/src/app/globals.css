@@ -1,4 +1,323 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sora:wght@100..800&display=swap");
+
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
+:root {
+    --dark: #41444b;
+    --beige: #cabfab;
+    --cream: #dfd8c8;
+    --grey: #52575d;
+    --orange: #f2613f;
+    --brand: 10;
+    --total-width: 12rem;
+    --logo-width: calc(var(--brand) * var(--logo-width) * 2);
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--cream);
+    font-family: "Anton", sans-serif;
+    overflow-x: hidden;
+}
+
+.bannerOne {
+    background-color: var(--beige);
+}
+.bannerTwo {
+    background-color: var(--dark);
+}
+.bannerThree {
+    background-color: var(--orange);
+}
+.bannerFour {
+    background-color: var(--grey);
+}
+
+nav {
+    margin-top: 3.5rem;
+    display: flex;
+    width: 100vw;
+    position: fixed;
+    justify-content: flex-end;
+    z-index: 4;
+}
+
+nav div {
+    flex: 0 0 80vw;
+}
+
+.navPaths {
+    color: var(--dark);
+}
+
+.navPaths:hover {
+    color: var(--beige);
+}
+
+.logoImage {
+    object-fit: contain;
+    margin-bottom: 1rem;
+}
+
+.themeButton {
+    width: 3.2em;
+    height: 1.8em;
+    border-radius: 2rem;
+    padding: 0 0.1em;
+    background-color: var(--orange);
+    box-shadow: inset 0 8px 60px rgba(0, 0, 0, 0.1),
+        inset 0 8px 8px rgba(0, 0, 0, 0.1), inset 0 -4px 4px rgba(0, 0, 0, 0.1);
+    position: relative;
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+
+.themeButton_indicator {
+    background-color: var(--cream);
+    width: 1.6em;
+    height: 1.6em;
+    border-radius: 50%;
+    position: absolute;
+    box-shadow: 0 8px 40px rgba(0, 0, 0, 0.2);
+    transition: transform 0.3s ease;
+}
+
+.themeButton_container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.themeButton_icon {
+    color: var(--orange);
+    font-size: 3rem;
+    transition: transform 0.5s ease;
+}
+
+.themeButton_icon:hover {
+    transform: rotate(360deg);
+}
+
+.homeSection {
+    width: 100%;
+    height: 100vh;
+    padding: 0 1rem;
+    display: flex;
+    flex-direction: column;
+    position: relative;
+    z-index: 3;
+}
+
+.split {
+    font-size: 4.2rem;
+}
+
+/* DARKMODE */
+[data-theme="dark"] {
+    --dark: #dfd8c8;
+    --beige: #cabfab;
+    --cream: #52575d;
+    --grey: #f2613f;
+    --orange: #41444b;
+}
+
+[data-theme="dark"] .themeButton_indicator {
+    transform: translateX(1.3em);
+}
+
+[data-theme="dark"] .themeButton_icon {
+    color: var(--grey);
+}
+
+.b-title {
+    width: 100vw;
+    color: var(--dark);
+    font-size: 5rem;
+    font-weight: 900;
+    text-align: center;
+    margin-top: 8rem;
+    position: fixed;
+}
+
+.homeContainer {
+    padding: 0 1rem;
+}
+
+[data-theme="dark"] .b-title {
+    color: var(--grey);
+}
+
+.subtitle {
+    width: 100%;
+    text-align: center;
+    font-size: 2.5rem;
+    color: var(--orange);
+    justify-content: center;
+    margin-top: 2rem;
+    position: absolute;
+    z-index: 3;
+}
+
+.slider {
+    width: 100vw;
+    height: fit-content;
+    background-color: transparent;
+    position: relative;
+    display: flex;
+    align-items: center;
+    overflow: hidden;
+}
+
+.brands {
+    list-style: none;
+    width: 50%;
+    display: flex;
+    padding: 1rem;
+}
+
+.right {
+    animation: slideRight 20s linear infinite;
+}
+
+.left {
+    animation: slideLeft 20s linear infinite;
+}
+
+.brand-logo {
+    scale: 0;
+    width: 30%;
+    min-width: 250px;
+    margin-left: 3rem;
+    opacity: 0.05;
+}
+
+@keyframes slideLeft {
+    0% {
+        transform: translateX(0);
+    }
+    100% {
+        transform: translateX(calc(-500%));
+    }
+}
+
+@keyframes slideRight {
+    0% {
+        transform: translateX(calc(-500%));
+    }
+    100% {
+        transform: translateX(0);
+    }
+}
+
+.orange {
+    width: 100vw;
+    height: 100vh;
+    opacity: 0;
+    background-color: var(--orange);
+    position: absolute;
+    z-index: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+}
+
+.helperWrapper {
+    width: 100vw;
+    height: 100px;
+    overflow: hidden;
+    display: flex;
+    justify-content: start;
+    align-items: center;
+    position: fixed;
+}
+
+.helper {
+    width: 300px;
+    height: 100px;
+    padding-left: 2rem;
+    display: block;
+}
+
+@media (min-width: 600px) {
+    .b-title {
+        font-size: 8rem;
+    }
+
+    .subtitle {
+        font-size: 3rem;
+    }
+
+    .right {
+        animation: slideRight 40s linear infinite;
+    }
+
+    .left {
+        animation: slideLeft 40s linear infinite;
+    }
+}
+
+@media (min-width: 1000px) {
+    .b-title {
+        font-size: 10rem;
+    }
+
+    .subtitle {
+        font-size: 3.6rem;
+    }
+
+    .brand-logo {
+        min-width: 400px;
+    }
+
+    .right {
+        animation: slideRight 80s linear infinite;
+    }
+
+    .left {
+        animation: slideLeft 80s linear infinite;
+    }
+
+    .homeContainer {
+        margin-top: 8rem;
+        position: relative;
+    }
+
+    @keyframes slideLeft {
+        0% {
+            transform: translateX(0);
+        }
+        100% {
+            transform: translateX(calc(-400%));
+        }
+    }
+
+    @keyframes slideRight {
+        0% {
+            transform: translateX(calc(-400%));
+        }
+        100% {
+            transform: translateX(0);
+        }
+    }
+
+    .navPaths {
+        font-size: 1.6rem;
+    }
+}
+
+@media (min-width: 1400px) {
+    .b-title {
+        font-size: 15rem;
+    }
+}
