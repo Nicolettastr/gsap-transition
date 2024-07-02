@@ -1,22 +1,36 @@
 "use client";
 import gsap from "gsap";
 import TextPlugin from "gsap/TextPlugin";
-import { ScrollTrigger, Flip } from "gsap/all";
+import { ScrollTrigger, Flip, MotionPathPlugin } from "gsap/all";
 import { useEffect, useRef, useState } from "react";
 import Slider from "@/components/Slider";
 import { useGSAP } from "@gsap/react";
+import TitleWork from "@/components/title";
+import { Observer } from "gsap/Observer";
+import WorkObserver from "@/components/workObserver";
 
-gsap.registerPlugin(TextPlugin, ScrollTrigger, useGSAP, Flip);
+gsap.registerPlugin(
+    TextPlugin,
+    ScrollTrigger,
+    useGSAP,
+    Flip,
+    MotionPathPlugin,
+    Observer
+);
 
 const Home = () => {
     const titleRef = useRef(null);
     const subtitleRef = useRef(null);
     const homeSection = useRef(null);
     const orange = useRef(null);
+    const pageTitle = useRef(null);
     const [scale, setScale] = useState(false);
     const logoWrapper = useRef(null);
-
+    const titleWork = useRef(null);
     const [windowWidth, setWindowWidth] = useState(window.innerWidth);
+    const [animation, setAnimation] = useState({
+        work: false,
+    });
 
     useGSAP(
         () => {
@@ -136,6 +150,49 @@ const Home = () => {
         { scope: titleRef }
     );
 
+    useGSAP(
+        () => {
+            gsap.fromTo(
+                ".title__work",
+                { opacity: 0, xPercent: -150 },
+                {
+                    opacity: 1,
+                    xPercent: 0,
+                    scale: 1.3,
+                    duration: 0.4,
+                    stagger: 0.2,
+                    onComplete: () => {
+                        gsap.to(".title__work", {
+                            yPercent: -5,
+                            duration: 0.3,
+                            stagger: 0.05,
+                        });
+                    },
+                    scrollTrigger: {
+                        trigger: pageTitle.current,
+                        start: "top 75%",
+                    },
+                }
+            );
+        },
+        { scope: pageTitle }
+    );
+
+    const previous = () => {
+        console.log("hola soy previous");
+    };
+
+    const next = () => {
+        console.log("hola soy next");
+    };
+
+    Observer.create({
+        target: window,
+        type: "wheel, scroll",
+        onUp: () => previous(),
+        onDown: () => next(),
+    });
+
     return (
         <>
             <section ref={homeSection} className='homeSection'>
@@ -161,7 +218,10 @@ const Home = () => {
                     <Slider scale={scale} className={"right"} />
                 )}
             </div>
-            <div className='h-80'></div>
+            <div ref={pageTitle} className='title__work_container'>
+                <TitleWork titleWork={titleWork} />
+            </div>
+            <WorkObserver />
         </>
     );
 };

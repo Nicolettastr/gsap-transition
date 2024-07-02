@@ -1,5 +1,5 @@
 import { useGSAP } from "@gsap/react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import gsap from "gsap";
 import { useAppSelector } from "@/redux/hooks";
 
@@ -15,7 +15,7 @@ const Slider: React.FC<SliderProps> = ({ className, scale }) => {
 
     console.log(theme);
 
-    const [images, setImages] = useState([
+    const [images] = useState([
         "./html.svg",
         "./css.svg",
         "./js.svg",
