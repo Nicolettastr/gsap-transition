@@ -13,8 +13,6 @@ gsap.registerPlugin(useGSAP);
 const Slider: React.FC<SliderProps> = ({ className, scale }) => {
     const theme = useAppSelector((state) => state.themeReducer.value);
 
-    console.log(theme);
-
     const [images] = useState([
         "./html.svg",
         "./css.svg",
@@ -48,8 +46,6 @@ const Slider: React.FC<SliderProps> = ({ className, scale }) => {
         "./redux.svg",
         "./sql.svg",
     ]);
-
-    console.log(theme);
 
     const filteredImages = useMemo(() => {
         if (theme) {

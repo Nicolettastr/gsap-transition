@@ -7,7 +7,6 @@ import Slider from "@/components/Slider";
 import { useGSAP } from "@gsap/react";
 import TitleWork from "@/components/title";
 import { Observer } from "gsap/Observer";
-import WorkObserver from "@/components/workObserver";
 
 gsap.registerPlugin(
     TextPlugin,
@@ -27,10 +26,8 @@ const Home = () => {
     const [scale, setScale] = useState(false);
     const logoWrapper = useRef(null);
     const titleWork = useRef(null);
-    const [windowWidth, setWindowWidth] = useState(window.innerWidth);
-    const [animation, setAnimation] = useState({
-        work: false,
-    });
+    const [windowWidth, setWindowWidth] = useState(0);
+    const [windowHeight, setWindowHeight] = useState(window.innerHeight);
 
     useGSAP(
         () => {
@@ -91,6 +88,7 @@ const Home = () => {
     useEffect(() => {
         const handleResize = () => {
             setWindowWidth(window.innerWidth);
+            setWindowHeight(window.innerHeight);
         };
 
         window.addEventListener("resize", handleResize);
@@ -99,6 +97,8 @@ const Home = () => {
             window.removeEventListener("resize", handleResize);
         };
     }, []);
+
+    console.log(windowHeight);
 
     useGSAP(
         () => {
@@ -166,6 +166,33 @@ const Home = () => {
                             yPercent: -5,
                             duration: 0.3,
                             stagger: 0.05,
+                            onComplete: () => {
+                                gsap.to(".title__work", {
+                                    opacity: 1,
+                                    duration: 2,
+                                    ease: "power3.inOut",
+                                    scrollTrigger: {
+                                        trigger: pageTitle.current,
+                                        start: "top 75%",
+                                        end: "+=500",
+                                        markers: true,
+                                        scrub: true,
+                                    },
+                                });
+
+                                gsap.to(".title__work", {
+                                    opacity: 0,
+                                    duration: 2,
+                                    ease: "power3.inOut",
+                                    scrollTrigger: {
+                                        trigger: pageTitle.current,
+                                        start: "top 20%",
+                                        end: "+=100",
+                                        markers: true,
+                                        scrub: true,
+                                    },
+                                });
+                            },
                         });
                     },
                     scrollTrigger: {
@@ -177,21 +204,6 @@ const Home = () => {
         },
         { scope: pageTitle }
     );
-
-    const previous = () => {
-        console.log("hola soy previous");
-    };
-
-    const next = () => {
-        console.log("hola soy next");
-    };
-
-    Observer.create({
-        target: window,
-        type: "wheel, scroll",
-        onUp: () => previous(),
-        onDown: () => next(),
-    });
 
     return (
         <>
@@ -221,7 +233,6 @@ const Home = () => {
             <div ref={pageTitle} className='title__work_container'>
                 <TitleWork titleWork={titleWork} />
             </div>
-            <WorkObserver />
         </>
     );
 };
