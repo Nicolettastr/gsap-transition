@@ -7,6 +7,7 @@ import Slider from "@/components/Slider";
 import { useGSAP } from "@gsap/react";
 import TitleWork from "@/components/title";
 import { Observer } from "gsap/Observer";
+import WorkLinks from "@/components/workLinks";
 
 gsap.registerPlugin(
     TextPlugin,
@@ -28,6 +29,11 @@ const Home = () => {
     const titleWork = useRef(null);
     const [windowWidth, setWindowWidth] = useState(0);
     const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+    const workSection = useRef(null);
+    const workContainer = useRef(null);
+    const [animation, setAnimation] = useState({
+        work: false,
+    });
 
     useGSAP(
         () => {
@@ -169,26 +175,24 @@ const Home = () => {
                             onComplete: () => {
                                 gsap.to(".title__work", {
                                     opacity: 1,
-                                    duration: 2,
+                                    duration: 3,
                                     ease: "power3.inOut",
                                     scrollTrigger: {
                                         trigger: pageTitle.current,
                                         start: "top 75%",
                                         end: "+=500",
-                                        markers: true,
                                         scrub: true,
                                     },
                                 });
 
                                 gsap.to(".title__work", {
                                     opacity: 0,
-                                    duration: 2,
+                                    duration: 3,
                                     ease: "power3.inOut",
                                     scrollTrigger: {
                                         trigger: pageTitle.current,
                                         start: "top 20%",
                                         end: "+=100",
-                                        markers: true,
                                         scrub: true,
                                     },
                                 });
@@ -223,16 +227,19 @@ const Home = () => {
                     </p>
                 </div>
             </section>
-            <div ref={orange} className='orange'>
+            <section ref={orange} className='orange'>
                 <Slider scale={scale} className={"right"} />
                 <Slider scale={scale} className={"left"} />
                 {windowWidth < 1000 && (
                     <Slider scale={scale} className={"right"} />
                 )}
-            </div>
-            <div ref={pageTitle} className='title__work_container'>
+            </section>
+            <section ref={pageTitle} className='title__work_container'>
                 <TitleWork titleWork={titleWork} />
-            </div>
+            </section>
+            <section className='wrap'>
+                <WorkLinks />
+            </section>
         </>
     );
 };
