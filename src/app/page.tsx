@@ -209,6 +209,19 @@ const Home = () => {
         { scope: pageTitle }
     );
 
+    useGSAP(
+        () => {
+            ScrollTrigger.create({
+                trigger: workSection.current,
+                start: "top top",
+                end: "bottom bottom",
+                pin: ".work__right",
+                markers: true,
+            });
+        },
+        { scope: workSection }
+    );
+
     return (
         <>
             <section ref={homeSection} className='homeSection'>
@@ -237,7 +250,7 @@ const Home = () => {
             <section ref={pageTitle} className='title__work_container'>
                 <TitleWork titleWork={titleWork} />
             </section>
-            <section className='wrap'>
+            <section ref={workSection} className='wrap'>
                 <WorkLinks />
             </section>
         </>
