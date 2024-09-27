@@ -1,4 +1,5 @@
 @import url("https://fonts.googleapis.com/css2?family=Anton&family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Sora:wght@100..800&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playwrite+NZ:wght@100..400&display=swap");
 
 @tailwind base;
 @tailwind components;
@@ -260,6 +261,57 @@ nav {
     font-weight: 900;
 }
 
+/* work */
+
+.title__work_container {
+    display: flex;
+    width: 100%;
+    height: 100%;
+    justify-content: center;
+    position: absolute;
+    z-index: 4;
+}
+
+.title__work {
+    font-size: 10rem;
+    font-weight: 900;
+    color: white;
+    opacity: 0;
+}
+
+/*Projects*/
+
+.wrap {
+    width: 100vw;
+    height: 100vh;
+}
+
+.spacer {
+    height: 15vh;
+}
+
+.work {
+    display: flex;
+    width: 100vw;
+    height: 100vh;
+}
+
+.work__left,
+.work__right {
+    width: 48%;
+    height: 100%;
+}
+
+.work__info {
+    height: 100%;
+}
+
+.work__img {
+    width: 100%;
+    height: fit-content;
+    object-fit: contain;
+}
+
 @media (min-width: 600px) {
     .b-title {
         font-size: 8rem;
@@ -334,6 +386,10 @@ nav {
 
     .b-title {
         font-size: 10rem;
+    }
+
+    .spacer {
+        height: 10vh;
     }
 }
 

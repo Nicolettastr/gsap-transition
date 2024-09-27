@@ -1,5 +1,5 @@
 import { useGSAP } from "@gsap/react";
-import { useEffect, useMemo, useRef, useState } from "react";
+import { useMemo, useRef, useState } from "react";
 import gsap from "gsap";
 import { useAppSelector } from "@/redux/hooks";
 import Image from "next/image";
@@ -13,7 +13,8 @@ gsap.registerPlugin(useGSAP);
 
 const Slider: React.FC<SliderProps> = ({ className, scale }) => {
     const theme = useAppSelector((state) => state.themeReducer.value);
-    const [images, setImages] = useState([
+
+    const [images] = useState([
         "./html.svg",
         "./css.svg",
         "./js.svg",
@@ -47,9 +48,6 @@ const Slider: React.FC<SliderProps> = ({ className, scale }) => {
         "./sql.svg",
     ]);
 
-    // Create refs for each image
-    const imageRefs = images.map(() => useRef(null));
-
     const filteredImages = useMemo(() => {
         if (theme) {
             return images.filter((img) => img !== "./c.svg");
@@ -57,6 +55,11 @@ const Slider: React.FC<SliderProps> = ({ className, scale }) => {
             return images.filter((img) => img !== "./cdark.svg");
         }
     }, [images, theme]);
+
+    const imageRefs = new Array(images.length)
+        .fill(null)
+        // eslint-disable-next-line react-hooks/rules-of-hooks
+        .map(() => useRef(null));
 
     useGSAP(() => {
         if (scale) {
