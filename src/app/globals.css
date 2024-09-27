@@ -64,6 +64,7 @@ nav {
 
 .themeButton {
     width: 3.2em;
+    min-width: 52px;
     height: 1.8em;
     border-radius: 2rem;
     padding: 0 0.1em;
@@ -242,12 +243,21 @@ nav {
 
 .homeContainer {
     width: 100vw;
-height: 80vh;
-display: flex;
-align-items: center;
-flex-direction: column;
-position: fixed;
-top: 20%;
+    height: 80vh;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    position: fixed;
+    top: 20%;
+}
+
+#zoom-in {
+    width: 100%;
+    height: 60vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-weight: 900;
 }
 
 @media (min-width: 600px) {
@@ -273,9 +283,8 @@ top: 20%;
 }
 
 @media (min-width: 1080px) {
-
     .subtitle {
-        top: 75%
+        top: 75%;
     }
 
     .brand-logo {
@@ -319,12 +328,23 @@ top: 20%;
 }
 
 @media (min-width: 1300px) {
-
     .subtitle {
-        top: 60%
+        top: 60%;
     }
 
     .b-title {
         font-size: 10rem;
     }
+}
+
+.blue {
+    width: 100vw;
+    height: 80vh;
+    background-color: blue;
+}
+
+.green {
+    width: 100vw;
+    height: 80vh;
+    background-color: green;
 }

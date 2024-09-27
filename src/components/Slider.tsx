@@ -2,6 +2,7 @@ import { useGSAP } from "@gsap/react";
 import { useEffect, useMemo, useRef, useState } from "react";
 import gsap from "gsap";
 import { useAppSelector } from "@/redux/hooks";
+import Image from "next/image";
 
 interface SliderProps {
     className: string;
@@ -12,9 +13,6 @@ gsap.registerPlugin(useGSAP);
 
 const Slider: React.FC<SliderProps> = ({ className, scale }) => {
     const theme = useAppSelector((state) => state.themeReducer.value);
-
-    console.log(theme);
-
     const [images, setImages] = useState([
         "./html.svg",
         "./css.svg",
@@ -49,7 +47,8 @@ const Slider: React.FC<SliderProps> = ({ className, scale }) => {
         "./sql.svg",
     ]);
 
-    console.log(theme);
+    // Create refs for each image
+    const imageRefs = images.map(() => useRef(null));
 
     const filteredImages = useMemo(() => {
         if (theme) {
@@ -59,12 +58,10 @@ const Slider: React.FC<SliderProps> = ({ className, scale }) => {
         }
     }, [images, theme]);
 
-    const icons = new Array(images.length).fill(null).map(() => useRef(null));
-
     useGSAP(() => {
         if (scale) {
-            icons.forEach((iconRef) => {
-                gsap.to(iconRef.current, {
+            imageRefs.forEach((ref, index) => {
+                gsap.to(ref.current, {
                     scale: 1,
                     ease: "Power1.easeInOut",
                     duration: 5,
@@ -78,12 +75,14 @@ const Slider: React.FC<SliderProps> = ({ className, scale }) => {
         <div className='slider'>
             <div className={`brands ${className}`}>
                 {filteredImages.map((src, index) => (
-                    <img
+                    <Image
                         key={index}
-                        ref={icons[index]}
+                        ref={imageRefs[index]}
                         className='brand-logo'
                         src={src}
                         alt=''
+                        width={100}
+                        height={100}
                     />
                 ))}
             </div>
