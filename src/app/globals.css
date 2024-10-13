@@ -11,6 +11,7 @@
     --cream: #dfd8c8;
     --grey: #52575d;
     --orange: #f2613f;
+    --orangeLight: #f2613f;
     --brand: 10;
     --total-width: 12rem;
     --logo-width: calc(var(--brand) * var(--logo-width) * 2);
@@ -239,7 +240,7 @@ nav {
     width: 300px;
     height: 100px;
     padding-left: 2rem;
-    display: block;
+    display: inline;
 }
 
 .homeContainer {
@@ -259,6 +260,13 @@ nav {
     justify-content: center;
     align-items: center;
     font-weight: 900;
+}
+
+/* section */
+
+.section {
+    width: 100%;
+    margin-top: 5rem;
 }
 
 /* work */
@@ -282,34 +290,81 @@ nav {
 /*Projects*/
 
 .wrap {
-    width: 100vw;
+    width: 90vw;
     height: 100vh;
 }
 
-.spacer {
-    height: 15vh;
-}
-
-.work {
+.work_container_wrapper {
+    margin: 2rem;
     display: flex;
-    width: 100vw;
-    height: 100vh;
 }
 
-.work__left,
-.work__right {
-    width: 48%;
-    height: 100%;
+.work_description_wrapper {
+    display: none;
 }
 
-.work__info {
-    height: 100%;
-}
-
-.work__img {
+.work_links_wrapper {
     width: 100%;
-    height: fit-content;
-    object-fit: contain;
+    height: 100vh;
+    display: grid;
+    grid-template-columns: auto auto;
+    place-content: center;
+}
+
+.project_container {
+    width: 15rem;
+    height: 15rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    border: 0.5px solid var(--orangeLight);
+    border-bottom: none;
+    z-index: 10;
+}
+
+.project_container:nth-child(odd) {
+    border-right: none;
+}
+
+.isLastProject,
+.isPenultimateProject {
+    border-right: 0.5px solid var(--orangeLight) !important;
+    border-bottom: 0.5px solid var(--orangeLight);
+}
+
+.work_project_info_container p {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    color: var(--orangeLight);
+    transition: transform 2s ease;
+}
+
+.work_project_info_container:hover p {
+    transform: scale(1.1);
+}
+
+.work_project_info_container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: end;
+}
+
+.work_project_info_container span {
+    margin: 0 0.2rem 0.2rem 0;
+    font-size: 1.3rem;
+    color: var(--grey);
+    opacity: 0;
+}
+
+.work_project_info_container:hover span {
+    opacity: 1;
 }
 
 @media (min-width: 600px) {
@@ -354,6 +409,17 @@ nav {
     .homeContainer {
         margin-top: 3rem;
         height: 50vh;
+    }
+
+    .work_description_wrapper {
+        width: 45%;
+        height: 100vh;
+        display: inline;
+        background-color: green;
+    }
+
+    .work_links_wrapper {
+        width: 45%;
     }
 
     @keyframes slideLeft {

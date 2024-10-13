@@ -8,6 +8,7 @@ import { useGSAP } from "@gsap/react";
 import TitleWork from "@/components/title";
 import { Observer } from "gsap/Observer";
 import WorkLinks from "@/components/workLinks";
+import WorkDescription from "@/components/WorkDescription";
 
 gsap.registerPlugin(
     TextPlugin,
@@ -250,7 +251,8 @@ const Home = () => {
             <section ref={pageTitle} className='title__work_container'>
                 <TitleWork titleWork={titleWork} />
             </section>
-            <section ref={workSection} className='wrap'>
+            <section ref={workSection} className='work_container_wrapper wrap'>
+                <WorkDescription />
                 <WorkLinks />
             </section>
         </>
