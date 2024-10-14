@@ -4,7 +4,7 @@ import { ProjectsData, projectsData } from "../constants/projects";
 import { RiExternalLinkLine } from "react-icons/ri";
 
 interface WorkLinksProps {
-    onHover: (project: ProjectsData | null) => void;
+    onHover: (project: ProjectsData) => void;
 }
 
 const WorkLinks: React.FC<WorkLinksProps> = ({ onHover }) => {
@@ -26,7 +26,6 @@ const WorkLinks: React.FC<WorkLinksProps> = ({ onHover }) => {
                         : ``
                 }`}
                 onMouseEnter={() => onHover(project)}
-                onMouseLeave={() => onHover(null)}
             >
                 <div className='work_project_info_container'>
                     <p className='project_name'>{project.name}</p>

@@ -413,8 +413,22 @@ nav {
 
     .work_description_wrapper {
         width: 45%;
-        height: 100vh;
-        display: inline;
+        height: 80vh;
+        display: flex;
+        justify-content: center;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .work_description_wrapper figure {
+        width: 100%;
+        height: fit-content;
+    }
+
+    .work_description_wrapper figure img {
+        width: 50%;
+        height: fit-content;
+        object-fit: contain;
     }
 
     .work_links_wrapper {

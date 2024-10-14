@@ -32,13 +32,22 @@ const Home = () => {
     const [windowWidth, setWindowWidth] = useState(0);
     const [windowHeight, setWindowHeight] = useState(window.innerHeight);
     const workSection = useRef(null);
-    const workContainer = useRef(null);
-    const [animation, setAnimation] = useState({
-        work: false,
-    });
+    const initProjectData = {
+        description:
+            "Designed and developed my personal portfolio using a modern stack of technologies. The frontend is built with HTML, CSS, JavaScript, React, and Next.js for optimized performance. This project showcases my skills, projects, and experiences",
+        link: "https://nicolestruggia.vercel.app/",
+        name: "Portfolio 2024",
+        photo: "/2.jpg",
+    };
+    const [projectHover, setProjectHover] =
+        useState<ProjectsData>(initProjectData);
 
-    const handleProject = (project: ProjectsData | null) => {
-        console.log(project);
+    const handleProject = (project: ProjectsData) => {
+        if (project === null) {
+            setProjectHover(initProjectData);
+        }
+
+        setProjectHover(project);
     };
 
     useGSAP(
@@ -257,7 +266,7 @@ const Home = () => {
                 <TitleWork titleWork={titleWork} />
             </section>
             <section ref={workSection} className='work_container_wrapper wrap'>
-                <WorkDescription />
+                <WorkDescription projectHover={projectHover} />
                 <WorkLinks onHover={handleProject} />
             </section>
         </>
