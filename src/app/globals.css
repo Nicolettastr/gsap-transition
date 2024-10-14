@@ -48,7 +48,7 @@ nav {
     width: 100vw;
     position: fixed;
     justify-content: space-around;
-    z-index: 4;
+    z-index: 100;
 }
 
 .navPaths {
@@ -415,7 +415,6 @@ nav {
         width: 45%;
         height: 100vh;
         display: inline;
-        background-color: green;
     }
 
     .work_links_wrapper {

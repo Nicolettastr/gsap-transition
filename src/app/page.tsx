@@ -9,6 +9,7 @@ import TitleWork from "@/components/title";
 import { Observer } from "gsap/Observer";
 import WorkLinks from "@/components/workLinks";
 import WorkDescription from "@/components/WorkDescription";
+import { projectsData, ProjectsData } from "@/constants/projects";
 
 gsap.registerPlugin(
     TextPlugin,
@@ -35,6 +36,10 @@ const Home = () => {
     const [animation, setAnimation] = useState({
         work: false,
     });
+
+    const handleProject = (project: ProjectsData | null) => {
+        console.log(project);
+    };
 
     useGSAP(
         () => {
@@ -253,7 +258,7 @@ const Home = () => {
             </section>
             <section ref={workSection} className='work_container_wrapper wrap'>
                 <WorkDescription />
-                <WorkLinks />
+                <WorkLinks onHover={handleProject} />
             </section>
         </>
     );

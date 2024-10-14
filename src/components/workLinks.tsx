@@ -1,10 +1,16 @@
 import Link from "next/link";
 import Image from "next/image";
-import { projectsData } from "../constants/projects";
+import { ProjectsData, projectsData } from "../constants/projects";
 import { RiExternalLinkLine } from "react-icons/ri";
 
-const WorkLinks = () => {
+interface WorkLinksProps {
+    onHover: (project: ProjectsData | null) => void;
+}
+
+const WorkLinks: React.FC<WorkLinksProps> = ({ onHover }) => {
     const projects = projectsData.map((project, index) => {
+        console.log(project);
+
         const isLastProject = index === projectsData.length - 1;
         const isPenultimateProject = index === projectsData.length - 2;
 
@@ -19,6 +25,8 @@ const WorkLinks = () => {
                         ? `isPenultimateProject`
                         : ``
                 }`}
+                onMouseEnter={() => onHover(project)}
+                onMouseLeave={() => onHover(null)}
             >
                 <div className='work_project_info_container'>
                     <p className='project_name'>{project.name}</p>

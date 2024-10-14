@@ -3,8 +3,16 @@ import two from "../../public/2.jpg";
 import three from "../../public/3.jpg";
 import four from "../../public/4.jpg";
 import five from "../../public/5.jpg";
+import { StaticImageData } from "next/image";
 
-export const projectsData = [
+export type ProjectsData = {
+    name: string;
+    link: string;
+    description: string;
+    photo: StaticImageData;
+};
+
+export const projectsData: ProjectsData[] = [
     {
         name: "Donair",
         link: "https://donair.es/",
