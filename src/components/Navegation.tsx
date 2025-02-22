@@ -1,7 +1,7 @@
 "use client";
+import ThemeButton from "./ThemeButton";
 import TransitionLink from "./TransitionLink";
 import { useAppSelector } from "@/redux/hooks";
-import ThemeButton from "./themeButton";
 
 const Navigation = () => {
     const theme = useAppSelector((state) => state.themeReducer.value);

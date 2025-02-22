@@ -2,7 +2,7 @@ import { ProjectsData } from "@/constants/projects";
 import Image from "next/image";
 
 interface WorkDescriptionProps {
-    projectHover: ProjectsData;
+    projectHover: Partial<ProjectsData>;
 }
 
 const WorkDescription: React.FC<WorkDescriptionProps> = ({ projectHover }) => {
@@ -12,12 +12,12 @@ const WorkDescription: React.FC<WorkDescriptionProps> = ({ projectHover }) => {
                 <Image
                     src={projectHover?.photo ?? ""}
                     alt={projectHover?.name ?? ""}
-                    width={50}
-                    height={50}
+                    width={500}
+                    height={500}
+                    layout='intrinsic'
                 />
             </figure>
-            <h2>{projectHover?.name}</h2>
-            <p>{projectHover?.description}</p>
+            <p>{projectHover.description}</p>
         </div>
     );
 };

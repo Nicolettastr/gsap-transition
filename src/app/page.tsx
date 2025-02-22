@@ -5,11 +5,12 @@ import { ScrollTrigger, Flip, MotionPathPlugin } from "gsap/all";
 import { useEffect, useRef, useState } from "react";
 import Slider from "@/components/Slider";
 import { useGSAP } from "@gsap/react";
-import TitleWork from "@/components/title";
 import { Observer } from "gsap/Observer";
-import WorkLinks from "@/components/workLinks";
 import WorkDescription from "@/components/WorkDescription";
 import { projectsData, ProjectsData } from "@/constants/projects";
+import TitleWork from "@/components/Title";
+import WorkLinks from "@/components/WorkLinks";
+import { animateTitleWork } from "@/utils/animatedTitle";
 
 gsap.registerPlugin(
     TextPlugin,
@@ -29,24 +30,17 @@ const Home = () => {
     const [scale, setScale] = useState(false);
     const logoWrapper = useRef(null);
     const titleWork = useRef(null);
+    const titleProject = useRef(null);
     const [windowWidth, setWindowWidth] = useState(0);
     const [windowHeight, setWindowHeight] = useState(window.innerHeight);
+    const projectTitle = useRef(null);
+    const projectSection = useRef(null);
     const workSection = useRef(null);
-    const initProjectData = {
-        description:
-            "Designed and developed my personal portfolio using a modern stack of technologies. The frontend is built with HTML, CSS, JavaScript, React, and Next.js for optimized performance. This project showcases my skills, projects, and experiences",
-        link: "https://nicolestruggia.vercel.app/",
-        name: "Portfolio 2024",
-        photo: "/2.jpg",
-    };
-    const [projectHover, setProjectHover] =
-        useState<ProjectsData>(initProjectData);
+    const [projectHover, setProjectHover] = useState<Partial<ProjectsData>>(
+        projectsData[0]
+    );
 
     const handleProject = (project: ProjectsData) => {
-        if (project === null) {
-            setProjectHover(initProjectData);
-        }
-
         setProjectHover(project);
     };
 
@@ -119,8 +113,6 @@ const Home = () => {
         };
     }, []);
 
-    console.log(windowHeight);
-
     useGSAP(
         () => {
             ScrollTrigger.create({
@@ -173,55 +165,16 @@ const Home = () => {
 
     useGSAP(
         () => {
-            gsap.fromTo(
-                ".title__work",
-                { opacity: 0, xPercent: -150 },
-                {
-                    opacity: 1,
-                    xPercent: 0,
-                    scale: 1.3,
-                    duration: 0.4,
-                    stagger: 0.2,
-                    onComplete: () => {
-                        gsap.to(".title__work", {
-                            yPercent: -5,
-                            duration: 0.3,
-                            stagger: 0.05,
-                            onComplete: () => {
-                                gsap.to(".title__work", {
-                                    opacity: 1,
-                                    duration: 3,
-                                    ease: "power3.inOut",
-                                    scrollTrigger: {
-                                        trigger: pageTitle.current,
-                                        start: "top 75%",
-                                        end: "+=500",
-                                        scrub: true,
-                                    },
-                                });
-
-                                gsap.to(".title__work", {
-                                    opacity: 0,
-                                    duration: 3,
-                                    ease: "power3.inOut",
-                                    scrollTrigger: {
-                                        trigger: pageTitle.current,
-                                        start: "top 20%",
-                                        end: "+=100",
-                                        scrub: true,
-                                    },
-                                });
-                            },
-                        });
-                    },
-                    scrollTrigger: {
-                        trigger: pageTitle.current,
-                        start: "top 75%",
-                    },
-                }
-            );
+            animateTitleWork(".title__work", pageTitle);
         },
         { scope: pageTitle }
+    );
+
+    useGSAP(
+        () => {
+            animateTitleWork(".title__project", projectTitle);
+        },
+        { scope: projectTitle }
     );
 
     useGSAP(
@@ -231,10 +184,21 @@ const Home = () => {
                 start: "top top",
                 end: "bottom bottom",
                 pin: ".work__right",
-                markers: true,
             });
         },
         { scope: workSection }
+    );
+
+    useGSAP(
+        () => {
+            ScrollTrigger.create({
+                trigger: projectSection.current,
+                start: "top top",
+                end: "bottom bottom",
+                pin: ".title__project",
+            });
+        },
+        { scope: projectSection }
     );
 
     return (
@@ -263,9 +227,31 @@ const Home = () => {
                 )}
             </section>
             <section ref={pageTitle} className='title__work_container'>
-                <TitleWork titleWork={titleWork} />
+                <TitleWork
+                    titleWork={titleWork}
+                    title={["w", "o", "r", "k"]}
+                    className={"title__work"}
+                />
             </section>
-            <section ref={workSection} className='work_container_wrapper wrap'>
+            <section ref={workSection} className='work_container_wrapper'>
+                <WorkDescription projectHover={projectHover} />
+                <WorkLinks onHover={handleProject} />
+            </section>
+            <span className='space'></span>
+            <section
+                ref={projectTitle}
+                className='title__project_container mt-5'
+            >
+                <TitleWork
+                    titleWork={titleProject}
+                    title={["p", "r", "o", "j", "e", "c", "t", "s"]}
+                    className={"title__project"}
+                />
+            </section>
+            <section
+                ref={projectSection}
+                className='work_container_wrapper wrap'
+            >
                 <WorkDescription projectHover={projectHover} />
                 <WorkLinks onHover={handleProject} />
             </section>

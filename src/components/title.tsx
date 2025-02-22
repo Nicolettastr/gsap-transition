@@ -2,23 +2,18 @@ import React from "react";
 
 interface TitleProps {
     titleWork: React.RefObject<HTMLDivElement>;
+    title: string[];
+    className: string;
 }
 
-const TitleWork = ({ titleWork }: TitleProps) => {
+const TitleWork: React.FC<TitleProps> = ({ titleWork, title, className }) => {
     return (
         <>
-            <h2 ref={titleWork} className='title__work'>
-                W
-            </h2>
-            <h2 ref={titleWork} className='title__work'>
-                o
-            </h2>
-            <h2 ref={titleWork} className='title__work'>
-                r
-            </h2>
-            <h2 ref={titleWork} className='title__work'>
-                k
-            </h2>
+            {title.map((letter, index) => (
+                <h2 key={index} ref={titleWork} className={className}>
+                    {letter}
+                </h2>
+            ))}
         </>
     );
 };

@@ -2,20 +2,22 @@ import Link from "next/link";
 import Image from "next/image";
 import { ProjectsData, projectsData } from "../constants/projects";
 import { RiExternalLinkLine } from "react-icons/ri";
+import useNavigation from "@/app/utils/Navigation";
 
 interface WorkLinksProps {
     onHover: (project: ProjectsData) => void;
 }
 
 const WorkLinks: React.FC<WorkLinksProps> = ({ onHover }) => {
-    const projects = projectsData.map((project, index) => {
-        console.log(project);
+    const { goTo } = useNavigation();
 
+    const projects = projectsData.map((project, index) => {
         const isLastProject = index === projectsData.length - 1;
         const isPenultimateProject = index === projectsData.length - 2;
 
         return (
-            <div
+            <button
+                onClick={() => goTo(project.link, true)}
                 key={project.name}
                 id={`project-id-${project.name}`}
                 className={`project_container ${
@@ -33,7 +35,7 @@ const WorkLinks: React.FC<WorkLinksProps> = ({ onHover }) => {
                         <RiExternalLinkLine />
                     </span>
                 </div>
-            </div>
+            </button>
         );
     });
 

@@ -31,15 +31,19 @@ body {
 
 .bannerOne {
     background-color: var(--beige);
+    z-index: 150;
 }
 .bannerTwo {
     background-color: var(--dark);
+    z-index: 150;
 }
 .bannerThree {
     background-color: var(--orange);
+    z-index: 150;
 }
 .bannerFour {
     background-color: var(--grey);
+    z-index: 150;
 }
 
 nav {
@@ -53,6 +57,7 @@ nav {
 
 .navPaths {
     color: var(--dark);
+    z-index: 0;
 }
 
 .navPaths:hover {
@@ -271,7 +276,8 @@ nav {
 
 /* work */
 
-.title__work_container {
+.title__work_container,
+.title__project_container {
     display: flex;
     width: 100%;
     height: 100%;
@@ -280,35 +286,52 @@ nav {
     z-index: 4;
 }
 
-.title__work {
-    font-size: 10rem;
+.title__project_container {
+    margin-top: 5rem;
+}
+
+.title__work,
+.title__project {
+    font-size: 7rem;
     font-weight: 900;
     color: white;
     opacity: 0;
+    letter-spacing: 0.5rem;
 }
 
 /*Projects*/
 
-.wrap {
-    width: 90vw;
-    height: 100vh;
-}
-
 .work_container_wrapper {
     margin: 2rem;
     display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+    height: 100%;
+    margin-bottom: 15rem;
 }
 
 .work_description_wrapper {
     display: none;
+    background-color: var(--orange);
+}
+
+.work_description_wrapper p {
+    width: 90%;
+    padding: 3rem;
+    text-align: start;
+    background-color: rgba(240, 232, 232, 0.685);
+    border-radius: 0.3rem;
 }
 
 .work_links_wrapper {
     width: 100%;
-    height: 100vh;
+    height: 80vh;
     display: grid;
     grid-template-columns: auto auto;
     place-content: center;
+    background-color: white;
+    border-radius: 0 0.3rem 0.3rem 0;
 }
 
 .project_container {
@@ -332,6 +355,20 @@ nav {
     border-bottom: 0.5px solid var(--orangeLight);
 }
 
+.work_project_info_container {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: end;
+    transition: background-color 0.5s ease-in-out;
+}
+
+.work_project_info_container:hover {
+    background-color: var(--orange);
+}
+
 .work_project_info_container p {
     width: 100%;
     height: 100%;
@@ -345,15 +382,7 @@ nav {
 
 .work_project_info_container:hover p {
     transform: scale(1.1);
-}
-
-.work_project_info_container {
-    width: 100%;
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
-    align-items: end;
+    color: white;
 }
 
 .work_project_info_container span {
@@ -415,20 +444,26 @@ nav {
         width: 45%;
         height: 80vh;
         display: flex;
-        justify-content: center;
+        justify-content: start;
         flex-direction: column;
         align-items: center;
+        padding: 5rem 0;
+        border-radius: 0.3rem 0 0 0rem;
+        opacity: 0.8;
     }
 
     .work_description_wrapper figure {
         width: 100%;
         height: fit-content;
+        overflow: hidden;
+        border-radius: 0.3rem;
+        padding: 2rem;
     }
 
     .work_description_wrapper figure img {
-        width: 50%;
+        width: 100%;
         height: fit-content;
-        object-fit: contain;
+        border-radius: 0.3rem;
     }
 
     .work_links_wrapper {
