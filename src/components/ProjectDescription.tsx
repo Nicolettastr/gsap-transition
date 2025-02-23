@@ -5,7 +5,9 @@ interface WorkDescriptionProps {
     projectHover: Partial<ProjectsData>;
 }
 
-const WorkDescription: React.FC<WorkDescriptionProps> = ({ projectHover }) => {
+const ProjectDescription: React.FC<WorkDescriptionProps> = ({
+    projectHover,
+}) => {
     return (
         <div className='work_description_wrapper'>
             <figure>
@@ -22,4 +24,4 @@ const WorkDescription: React.FC<WorkDescriptionProps> = ({ projectHover }) => {
     );
 };
 
-export default WorkDescription;
+export default ProjectDescription;

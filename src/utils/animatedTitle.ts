@@ -30,18 +30,21 @@ export const animateTitleWork = (
                             scrollTrigger: {
                                 trigger: triggerRef.current,
                                 start: "top 75%",
-                                end: "+=200",
+                                end: "+=500",
                                 scrub: true,
                             },
                         });
 
                         gsap.to(selector, {
                             opacity: 0,
-                            duration: 3,
+                            duration: 4,
                             ease: "power3.inOut",
                             scrollTrigger: {
                                 trigger: triggerRef.current,
-                                start: "top 10%",
+                                start:
+                                    selector === ".title__project"
+                                        ? "top 25%"
+                                        : "top 10%",
                                 end: "+=100",
                                 scrub: true,
                             },

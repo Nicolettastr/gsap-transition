@@ -1,15 +1,9 @@
-import one from "../../public/image1.jpeg";
-import two from "../../public/2.jpg";
-import three from "../../public/3.jpg";
-import four from "../../public/4.jpg";
-import five from "../../public/5.jpg";
-import { StaticImport } from "next/dist/shared/lib/get-img-props";
-
 export type ProjectsData = {
     name: string;
     link: string;
     description: string;
     photo: string;
+    logo?: string;
 };
 
 export const projectsData: ProjectsData[] = [

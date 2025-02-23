@@ -1,14 +1,14 @@
 import Link from "next/link";
 import Image from "next/image";
-import { ProjectsData, projectsData } from "../constants/projects";
 import { RiExternalLinkLine } from "react-icons/ri";
-import useNavigation from "@/app/utils/Navigation";
+import useNavigation from "@/utils/Navigation";
+import { ProjectsData, projectsData } from "@/constants/projects";
 
-interface WorkLinksProps {
+interface ProjectLinksProps {
     onHover: (project: ProjectsData) => void;
 }
 
-const WorkLinks: React.FC<WorkLinksProps> = ({ onHover }) => {
+const ProjectLinks: React.FC<ProjectLinksProps> = ({ onHover }) => {
     const { goTo } = useNavigation();
 
     const projects = projectsData.map((project, index) => {
@@ -42,4 +42,4 @@ const WorkLinks: React.FC<WorkLinksProps> = ({ onHover }) => {
     return <div className='work_links_wrapper'>{projects}</div>;
 };
 
-export default WorkLinks;
+export default ProjectLinks;

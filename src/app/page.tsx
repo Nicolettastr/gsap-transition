@@ -1,22 +1,28 @@
 "use client";
 import gsap from "gsap";
 import TextPlugin from "gsap/TextPlugin";
-import { ScrollTrigger, Flip, MotionPathPlugin } from "gsap/all";
+import { ScrollTrigger, MotionPathPlugin } from "gsap/all";
 import { useEffect, useRef, useState } from "react";
 import Slider from "@/components/Slider";
 import { useGSAP } from "@gsap/react";
 import { Observer } from "gsap/Observer";
-import WorkDescription from "@/components/WorkDescription";
-import { projectsData, ProjectsData } from "@/constants/projects";
+import WorkDescription from "@/components/ProjectDescription";
 import TitleWork from "@/components/Title";
-import WorkLinks from "@/components/WorkLinks";
+import WorkLinks from "@/components/ProjectLinks";
 import { animateTitleWork } from "@/utils/animatedTitle";
+import { scrollTriggerAnimation } from "@/utils/scrolltrigger";
+import { AnimatedTitleIntro } from "@/utils/animated TitleIntro";
+import { scrollTriggerWorkSection } from "@/utils/scrollImageWorkSection";
+import Image from "next/image";
+import { projectsData, ProjectsData } from "@/constants/projects";
+import ProjectDescription from "@/components/ProjectDescription";
+import ProjectLinks from "@/components/ProjectLinks";
+import WorkSection from "@/components/WorkSection";
 
 gsap.registerPlugin(
     TextPlugin,
     ScrollTrigger,
     useGSAP,
-    Flip,
     MotionPathPlugin,
     Observer
 );
@@ -46,56 +52,7 @@ const Home = () => {
 
     useGSAP(
         () => {
-            if (titleRef.current && subtitleRef.current) {
-                setTimeout(() => {
-                    gsap.to(titleRef.current, {
-                        duration: 2,
-                        text: "Nicole Struggia",
-                        ease: "none",
-                        stagger: 0.05,
-                        onComplete: () => {
-                            gsap.fromTo(
-                                subtitleRef.current,
-                                {
-                                    opacity: 0,
-                                },
-                                {
-                                    opacity: 1,
-                                    duration: 2,
-                                }
-                            );
-                        },
-                    });
-
-                    gsap.fromTo(
-                        orange.current,
-                        {
-                            yPercent: -100,
-                            xPercent: -100,
-                            opacity: 0,
-                        },
-                        {
-                            opacity: 1,
-                            xPercent: 0,
-                            duration: 3,
-                            ease: "Power1.easeInOut",
-                            stagger: 0.2,
-                            onComplete: () => {
-                                setScale(true);
-                            },
-                        }
-                    );
-
-                    gsap.to(
-                        subtitleRef.current,
-
-                        {
-                            color: "#dfd8c8",
-                            duration: 3,
-                        }
-                    );
-                }, 2000);
-            }
+            AnimatedTitleIntro(titleRef, subtitleRef, orange, setScale);
         },
         { scope: titleRef }
     );
@@ -115,50 +72,12 @@ const Home = () => {
 
     useGSAP(
         () => {
-            ScrollTrigger.create({
-                trigger: logoWrapper.current,
-                start: "top top",
-                onEnter: () => {
-                    if (windowWidth > 1000) {
-                        Flip.fit(titleRef.current, logoWrapper.current, {
-                            fontSize: "2.2rem",
-                            paddingLeft: "1rem",
-                            paddingTop: "1rem",
-                            duration: 2,
-                            ease: "power1.inOut",
-                            stagger: 2,
-                            scrub: true,
-                        });
-                        gsap.to(subtitleRef.current, {
-                            opacity: 0,
-                            onComplete: () => {
-                                gsap.to(subtitleRef.current, {
-                                    display: "none",
-                                });
-                            },
-                        });
-                    } else if (windowWidth < 999) {
-                        Flip.fit(titleRef.current, logoWrapper.current, {
-                            fontSize: "2.2rem",
-                            textAlign: "center",
-                            paddingTop: "1rem",
-                            paddingRight: "2rem",
-                            duration: 2,
-                            ease: "power1.inOut",
-                            stagger: 2,
-                            scrub: true,
-                        });
-                        gsap.to(subtitleRef.current, {
-                            opacity: 0,
-                            onComplete: () => {
-                                gsap.to(subtitleRef.current, {
-                                    display: "none",
-                                });
-                            },
-                        });
-                    }
-                },
-            });
+            scrollTriggerAnimation(
+                windowWidth,
+                logoWrapper,
+                titleRef,
+                subtitleRef
+            );
         },
         { scope: titleRef }
     );
@@ -173,6 +92,13 @@ const Home = () => {
     useGSAP(
         () => {
             animateTitleWork(".title__project", projectTitle);
+        },
+        { scope: projectTitle }
+    );
+
+    useGSAP(
+        () => {
+            scrollTriggerWorkSection(workSection);
         },
         { scope: projectTitle }
     );
@@ -234,10 +160,8 @@ const Home = () => {
                 />
             </section>
             <section ref={workSection} className='work_container_wrapper'>
-                <WorkDescription projectHover={projectHover} />
-                <WorkLinks onHover={handleProject} />
+                <WorkSection />
             </section>
-            <span className='space'></span>
             <section
                 ref={projectTitle}
                 className='title__project_container mt-5'
@@ -252,8 +176,8 @@ const Home = () => {
                 ref={projectSection}
                 className='work_container_wrapper wrap'
             >
-                <WorkDescription projectHover={projectHover} />
-                <WorkLinks onHover={handleProject} />
+                <ProjectDescription projectHover={projectHover} />
+                <ProjectLinks onHover={handleProject} />
             </section>
         </>
     );

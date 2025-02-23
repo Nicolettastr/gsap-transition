@@ -1,12 +1,12 @@
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
-import Section from "./workSection";
+import Section from "./ProjectSection";
 
-interface WorkObserverProps {
-    workContainer: React.RefObject<HTMLDivElement>;
+interface ProjectObserverProps {
+    projectContainer: React.RefObject<HTMLDivElement>;
 }
 
-const WorkObserver = ({ workContainer }: WorkObserverProps) => {
+const ProjectObserver = ({ projectContainer }: ProjectObserverProps) => {
     const currentIndexRef = useRef<number>(0);
     const animatingRef = useRef<boolean>(false);
 
@@ -114,7 +114,7 @@ const WorkObserver = ({ workContainer }: WorkObserverProps) => {
     }, []);
 
     return (
-        <div ref={workContainer} className='work-container'>
+        <div ref={projectContainer} className='work-container'>
             <Section
                 title='Connected Souls'
                 className='first'
@@ -144,4 +144,4 @@ const WorkObserver = ({ workContainer }: WorkObserverProps) => {
     );
 };
 
-export default WorkObserver;
+export default ProjectObserver;
